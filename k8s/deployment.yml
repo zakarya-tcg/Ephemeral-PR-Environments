@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: preview-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: preview-app
+  template:
+    metadata:
+      labels:
+        app: preview-app
+    spec:
+      containers:
+      - name: preview-app
+        image: walnuts2000/preview-app
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        env:
+        - name: BRANCH_NAME
+          value: "manual-k8s-deploy"
